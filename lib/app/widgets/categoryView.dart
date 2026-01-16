@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 
-import '../domain/Category.dart';
-import '../domain/Attribute.dart';
+import '../model/category.dart';
+import '../model/attribute.dart';
 
 
 class CategoryView extends StatelessWidget {

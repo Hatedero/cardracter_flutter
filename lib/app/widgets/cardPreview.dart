@@ -1,8 +1,8 @@
-import 'package:cardracter_flutter/app/widgets/CategoryView.dart';
+import 'package:cardracter_flutter/app/widgets/categoryView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 
-import '../domain/Card.dart';
+import '../model/card.dart';
 
 
 class CardPreview extends StatelessWidget {

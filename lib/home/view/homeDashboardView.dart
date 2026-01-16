@@ -1,10 +1,10 @@
-import 'package:cardracter_flutter/app/widgets/CardPreview.dart';
+import 'package:cardracter_flutter/app/widgets/cardPreview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 
-import '../../app/domain/Card.dart';
+import '../../app/model/card.dart';
 
-import '../../app/widgets/AppBottomBar.dart';
+import '../../app/widgets/appBottomBar.dart';
 
 class HomeDashboardView extends StatefulWidget {
   const HomeDashboardView({super.key, required this.title});
@@ -16,7 +16,7 @@ class HomeDashboardView extends StatefulWidget {
 }
 
 class _HomeDashboardViewState extends State<HomeDashboardView> {
-  List<Card> cards = List.filled(1, Card());
+  List<Card> cards = List.empty();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
             ListView.builder(
               itemCount: cards.length,
               itemBuilder: (BuildContext context, int index) {
+                print(cards[index]);
                 return CardPreview(card: cards[index]);
             })
           ],

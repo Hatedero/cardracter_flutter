@@ -1,8 +1,8 @@
-import 'package:cardracter_flutter/app/widgets/CardPreview.dart';
+import 'package:cardracter_flutter/app/widgets/cardPreview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 
-import '../../app/domain/Card.dart';
+import '../../app/model/card.dart';
 
 class CardDetailsView extends StatefulWidget {
   const CardDetailsView({super.key, required this.title});

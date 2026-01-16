@@ -1,5 +1,5 @@
-import 'package:cardracter_flutter/cardDetails/view/CardDetailsView.dart';
-import 'package:cardracter_flutter/home/view/HomeDashboardView.dart';
+import 'package:cardracter_flutter/cardDetails/view/cardDetailsView.dart';
+import 'package:cardracter_flutter/home/view/homeDashboardView.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       routes: {
-        "/home" : (context) => HomeDashboardView(title: "home page"),
+        "/home" : (context) => HomeDashboardView(title: "Dashboard"),
         "/cardDetails" : (context) => CardDetailsView(title: "card details")
       },
-      home: const HomeDashboardView(title: 'home dashboard'),
+      home: const HomeDashboardView(title: 'Dashboard'),
     );
   }
 }
