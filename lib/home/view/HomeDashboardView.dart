@@ -1,16 +1,19 @@
+import 'package:cardracter_flutter/app/widgets/CardPreview.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card;
 
-class homeDashboardView extends StatefulWidget {
-  const homeDashboardView({super.key, required this.title});
+import '../../app/domain/Card.dart';
+
+class HomeDashboardView extends StatefulWidget {
+  const HomeDashboardView({super.key, required this.title});
 
   final String title;
 
   @override
-  State<homeDashboardView> createState() => _homeDashboardViewState();
+  State<HomeDashboardView> createState() => _HomeDashboardViewState();
 }
 
-class _homeDashboardViewState extends State<homeDashboardView> {
+class _HomeDashboardViewState extends State<HomeDashboardView> {
   List<Card> cards = List.empty();
 
   @override
@@ -24,11 +27,11 @@ class _homeDashboardViewState extends State<homeDashboardView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              'counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            ListView.builder(
+                itemCount: cards.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CardPreview(card: cards[index]);
+            })
           ],
         ),
       ),
