@@ -5,19 +5,26 @@ import 'package:flutter/material.dart' hide Card;
 import '../domain/Card.dart';
 
 
-class CardPreview extends StatelessWidget {
-  const CardPreview({super.key, required this.card});
+class CardView extends StatelessWidget {
+  const CardView({super.key, required this.card});
 
   final Card card;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(card.title),
+        Image.asset(""),
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(""),
-            Text(card.title)
+            for (var category in card.categories)
+              CategoryView(category: category)
           ],
-        );
+        )
+      ],
+    );
   }
 }

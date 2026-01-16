@@ -5,8 +5,8 @@ import '../domain/Category.dart';
 import '../domain/Attribute.dart';
 
 
-class CategoryPreview extends StatelessWidget {
-  const CategoryPreview({super.key, required this.category});
+class CategoryView extends StatelessWidget {
+  const CategoryView({super.key, required this.category});
 
   final Category category;
 

@@ -16,7 +16,7 @@ class HomeDashboardView extends StatefulWidget {
 }
 
 class _HomeDashboardViewState extends State<HomeDashboardView> {
-  List<Card> cards = List.empty();
+  List<Card> cards = List.filled(1, Card());
 
   @override
   Widget build(BuildContext context) {
