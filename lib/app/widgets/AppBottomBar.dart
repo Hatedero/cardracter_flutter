@@ -17,7 +17,7 @@ class AppBottomBar extends StatelessWidget {
             ),
             IconButton(tooltip: 'New Card',
                 icon: const Icon(Icons.add),
-                onPressed: () => Navigator.of(context).pushNamed("/cardDetails")
+                onPressed: () => Navigator.of(context).pushNamed("/newCard")
             ),
           ],
         ),
