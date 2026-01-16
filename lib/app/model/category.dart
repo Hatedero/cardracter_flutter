@@ -11,5 +11,8 @@ class Category {
   final int cardId;
   final List<Attribute> attributes;
 
-  Category({required this.categoryId, required this.title, required this.cardId, required this.attributes});
+  Category(this.categoryId,  this.title,  this.cardId,  this.attributes);
+
+  factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
+  Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }

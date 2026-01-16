@@ -1,5 +1,5 @@
 import 'package:cardracter_flutter/cardDetails/view/cardDetailsView.dart';
-import 'package:cardracter_flutter/home/view/homeDashboardView.dart';
+import 'package:cardracter_flutter/home/presentation/homeDashboardView.dart';
 import 'package:flutter/material.dart';
 
 void main() {

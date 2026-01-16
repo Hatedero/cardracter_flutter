@@ -11,8 +11,20 @@ class Card {
   final CardType type;
   final List<Category> categories;
 
-  Card(
-      {required this.id, required this.title, required this.image, required this.type, required this.categories});
+  Card(this.id,  this.title,  this.image,  this.type,  this.categories);
+
+  factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
+  Map<String, dynamic> toJson() => _$CardToJson(this);
 }
 
 enum CardType { Character, Collection }
+
+class Cards {
+  @JsonKey(name: "cards")
+  final List<Card>? cards;
+
+  Cards({this.cards});
+
+  /*factory Cards.fromJson(Map<String, dynamic> json) => _$CardsFromJson(json);
+  Map<String, dynamic> toJson() => _$CardsToJson(this);*/
+}

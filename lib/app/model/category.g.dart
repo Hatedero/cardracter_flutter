@@ -7,10 +7,10 @@ part of 'category.dart';
 // **************************************************************************
 
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
-  categoryId: (json['categoryId'] as num).toInt(),
-  title: json['title'] as String,
-  cardId: (json['cardId'] as num).toInt(),
-  attributes: (json['attributes'] as List<dynamic>)
+  (json['categoryId'] as num).toInt(),
+  json['title'] as String,
+  (json['cardId'] as num).toInt(),
+  (json['attributes'] as List<dynamic>)
       .map((e) => Attribute.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
