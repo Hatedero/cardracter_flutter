@@ -28,16 +28,21 @@ class _CardDetailsViewState extends State<CardDetailsView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton.icon(
-                onPressed: () => Navigator.of(context).pushNamed("/home"),
-                icon: Icon(Icons.home),
-                label: const Text("go to home page"),
+            Image.asset("images/nmfcover.jpg"),
+            Row(
+              children: <Widget>[
+                ElevatedButton.icon(
+                    onPressed: () => Navigator.of(context).pushNamed("/home"),
+                    icon: Icon(Icons.home),
+                    label: const Text("go to home page"),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () => Navigator.of(context).pushNamed("/newCard"),
+                  icon: Icon(Icons.add),
+                  label: const Text("go to modify card page"),
+                ),
+              ],
             ),
-            ElevatedButton.icon(
-              onPressed: () => Navigator.of(context).pushNamed("/newCard"),
-              icon: Icon(Icons.add),
-              label: const Text("go to modify card page"),
-            )
           ],
         ),
       ),
