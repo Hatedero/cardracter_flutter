@@ -1,5 +1,3 @@
-import 'package:cardracter_flutter/app/model/Attribute.dart';
-import 'package:cardracter_flutter/app/widgets/cardPreview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 
 import '../model/category.dart';
-import '../model/attribute.dart';
 
 
 class CategoryView extends StatelessWidget {
@@ -20,7 +19,7 @@ class CategoryView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 for (var attribute in category.attributes)
-                  Text(attribute.value)
+                  Text(attribute.value ?? "no value")
               ],
             )
           ],

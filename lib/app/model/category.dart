@@ -1,5 +1,6 @@
-import 'package:cardracter_flutter/app/model/attribute.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'attribute_data.dart';
 
 part 'category.g.dart';
 
