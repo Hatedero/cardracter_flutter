@@ -13,13 +13,12 @@ class AppBottomBar extends StatelessWidget {
             IconButton(
               tooltip: 'Dashboard',
               icon: const Icon(Icons.home),
-              onPressed: () {//go home
-                },
+              onPressed: () => Navigator.of(context).pushNamed("/home")
             ),
             IconButton(tooltip: 'New Card',
                 icon: const Icon(Icons.add),
-                onPressed: () {//go card creation page
-              }),
+                onPressed: () => Navigator.of(context).pushNamed("/cardDetails")
+            ),
           ],
         ),
     );

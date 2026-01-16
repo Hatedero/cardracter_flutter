@@ -1,3 +1,4 @@
+import 'package:cardracter_flutter/cardDetails/view/CardDetailsView.dart';
 import 'package:cardracter_flutter/home/view/HomeDashboardView.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      routes: {
+        "/home" : (context) => HomeDashboardView(title: "home page"),
+        "/cardDetails" : (context) => CardDetailsView(title: "card details")
+      },
       home: const HomeDashboardView(title: 'home dashboard'),
     );
   }

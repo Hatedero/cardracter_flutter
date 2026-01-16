@@ -4,19 +4,17 @@ import 'package:flutter/material.dart' hide Card;
 
 import '../../app/domain/Card.dart';
 
-import '../../app/widgets/AppBottomBar.dart';
-
-class HomeDashboardView extends StatefulWidget {
-  const HomeDashboardView({super.key, required this.title});
+class CardDetailsView extends StatefulWidget {
+  const CardDetailsView({super.key, required this.title});
 
   final String title;
 
   @override
-  State<HomeDashboardView> createState() => _HomeDashboardViewState();
+  State<CardDetailsView> createState() => _HomeDashboardViewState();
 }
 
-class _HomeDashboardViewState extends State<HomeDashboardView> {
-  List<Card> cards = List.filled(1, Card());
+class _HomeDashboardViewState extends State<CardDetailsView> {
+  List<Card> cards = List.empty();
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +23,15 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      bottomNavigationBar: AppBottomBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ListView.builder(
-              itemCount: cards.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CardPreview(card: cards[index]);
-            })
+            ElevatedButton.icon(
+                onPressed: Navigator.of(context).pop,
+                icon: Icon(Icons.home),
+                label: const Text("go to home page"),
+            ),
           ],
         ),
       ),
