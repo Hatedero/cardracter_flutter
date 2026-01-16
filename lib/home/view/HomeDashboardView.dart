@@ -38,11 +38,6 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: ()=> Navigator.of(context).pushNamed("/cardDetails"),
-        tooltip: 'Increment',
-        child: const Icon(Icons.card_giftcard),
-      ),
     );
   }
 }
