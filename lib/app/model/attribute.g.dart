@@ -7,15 +7,15 @@ part of 'attribute.dart';
 // **************************************************************************
 
 Attribute _$AttributeFromJson(Map<String, dynamic> json) => Attribute(
-  (json['attributeId'] as num).toInt(),
-  json['title'] as String,
-  json['value'] as String,
-  (json['categoryId'] as num).toInt(),
-);
+      (json['attributeId'] as num).toInt(),
+      json['title'] as String,
+      json['value'] as String,
+      (json['categoryId'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$AttributeToJson(Attribute instance) => <String, dynamic>{
-  'attributeId': instance.attributeId,
-  'title': instance.title,
-  'value': instance.value,
-  'categoryId': instance.categoryId,
-};
+      'attributeId': instance.attributeId,
+      'title': instance.title,
+      'value': instance.value,
+      'categoryId': instance.categoryId,
+    };

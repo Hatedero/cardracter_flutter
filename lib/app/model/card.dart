@@ -19,12 +19,13 @@ class Card {
 
 enum CardType { Character, Collection }
 
+@JsonSerializable(explicitToJson: true)
 class Cards {
   @JsonKey(name: "cards")
   final List<Card>? cards;
 
   Cards({this.cards});
 
-  /*factory Cards.fromJson(Map<String, dynamic> json) => _$CardsFromJson(json);
-  Map<String, dynamic> toJson() => _$CardsToJson(this);*/
+  factory Cards.fromJson(Map<String, dynamic> json) => _$CardsFromJson(json);
+  Map<String, dynamic> toJson() => _$CardsToJson(this);
 }

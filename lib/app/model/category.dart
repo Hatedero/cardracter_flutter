@@ -16,3 +16,6 @@ class Category {
   factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }
+
+/*factory Attribute.fromJson(Map<String, dynamic> json) => _$AttributeFromJson(json);
+  Map<String, dynamic> toJson() => _$AttributeToJson(this);*/
