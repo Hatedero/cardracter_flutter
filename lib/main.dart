@@ -1,5 +1,6 @@
 import 'package:cardracter_flutter/cardDetails/view/CardDetailsView.dart';
 import 'package:cardracter_flutter/home/view/HomeDashboardView.dart';
+import 'package:cardracter_flutter/newCard/view/newCardView.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/home" : (context) => HomeDashboardView(title: "home page"),
+        "/newCard" : (context) => NewCardView(title: "new card"),
         "/cardDetails" : (context) => CardDetailsView(title: "card details")
       },
       home: const HomeDashboardView(title: 'home dashboard'),
