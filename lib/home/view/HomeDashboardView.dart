@@ -28,17 +28,18 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ListView.builder(
-                itemCount: cards.length,
+              itemCount: cards.length,
               itemBuilder: (BuildContext context, int index) {
-                return CardPreview(card: cards[index]);
-            })
+              return CardPreview(card: cards[index]);
+            }),
+
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: ()=> Navigator.of(context).pushNamed("/cardDetails"),
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.card_giftcard),
       ),
     );
   }
