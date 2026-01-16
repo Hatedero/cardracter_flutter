@@ -1,6 +1,6 @@
-import 'package:cardracter_flutter/cardDetails/view/CardDetailsView.dart';
-import 'package:cardracter_flutter/home/view/HomeDashboardView.dart';
-import 'package:cardracter_flutter/newCard/view/NewCardView.dart';
+import 'package:cardracter_flutter/cardDetails/view/card_details_view.dart';
+import 'package:cardracter_flutter/home/view/home_dashboard_view.dart';
+import 'package:cardracter_flutter/newCard/view/new_card_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {

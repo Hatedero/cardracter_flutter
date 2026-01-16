@@ -1,10 +1,10 @@
-import 'package:cardracter_flutter/app/widgets/CardPreview.dart';
+import 'package:cardracter_flutter/app/widgets/card_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 
-import '../../app/domain/Card.dart';
+import '../../app/domain/card.dart';
 
-import '../../app/widgets/AppBottomBar.dart';
+import '../../app/widgets/app_bottom_bar.dart';
 
 class HomeDashboardView extends StatefulWidget {
   const HomeDashboardView({super.key, required this.title});

@@ -1,4 +1,4 @@
-import 'package:cardracter_flutter/app/domain/Attribute.dart';
+import 'package:cardracter_flutter/app/domain/attribute.dart';
 
 class Category {
   int categoryId = 0;
