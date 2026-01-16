@@ -4,6 +4,8 @@ import 'package:flutter/material.dart' hide Card;
 
 import '../../app/domain/Card.dart';
 
+import '../../app/widgets/AppBottomBar.dart';
+
 class HomeDashboardView extends StatefulWidget {
   const HomeDashboardView({super.key, required this.title});
 
@@ -23,6 +25,7 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
+      bottomNavigationBar: AppBottomBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -30,9 +33,8 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
             ListView.builder(
               itemCount: cards.length,
               itemBuilder: (BuildContext context, int index) {
-              return CardPreview(card: cards[index]);
-            }),
-
+                return CardPreview(card: cards[index]);
+            })
           ],
         ),
       ),
