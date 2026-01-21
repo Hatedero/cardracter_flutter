@@ -44,13 +44,13 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
       ),
       bottomNavigationBar: const AppBottomBar(),
       body: GridView.builder(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(8),
         itemCount: cards.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 2.5 / 3.5,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
         ),
         itemBuilder: (BuildContext context, int index) {
           return CardPreview(card: cards[index]);
