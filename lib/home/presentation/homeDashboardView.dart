@@ -31,30 +31,30 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
   @override
   Widget build(BuildContext context) {
 
-    final homeNotifier = context.watch<HomeDashboardNotifier>();
+    //final homeNotifier = context.watch<HomeDashboardNotifier>();
 
+    //final cards = context.watch<HomeDashboardNotifier>().cards;
 
-    final cards = context.watch<HomeDashboardNotifier>().cards;
+    final cards = List.filled(10, Card(0, "title", "", CardType.Character, List.empty()));
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      bottomNavigationBar: AppBottomBar(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ListView.builder(
-              itemCount: cards?.length,
-              itemBuilder: (BuildContext context, int index) {
-                print(cards?[index]);
-                if (cards?[index] != null)
-                  return CardPreview(card: cards![index]);
-            })
-          ],
+      bottomNavigationBar: const AppBottomBar(),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(12),
+        itemCount: cards.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 2.5 / 3.5,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
         ),
+        itemBuilder: (BuildContext context, int index) {
+          return CardPreview(card: cards[index]);
+        },
       ),
     );
   }

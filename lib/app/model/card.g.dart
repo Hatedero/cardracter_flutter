@@ -9,7 +9,7 @@ part of 'card.dart';
 Card _$CardFromJson(Map<String, dynamic> json) => Card(
       (json['id'] as num).toInt(),
       json['title'] as String,
-      (json['image'] as num).toInt(),
+      json['image'] as String,
       $enumDecode(_$CardTypeEnumMap, json['type']),
       (json['categories'] as List<dynamic>)
           .map((e) => Category.fromJson(e as Map<String, dynamic>))

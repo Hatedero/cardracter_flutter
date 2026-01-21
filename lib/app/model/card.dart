@@ -7,7 +7,7 @@ part 'card.g.dart';
 class Card {
   final int id;
   final String title;
-  final int image;
+  final String image;
   final CardType type;
   final List<Category> categories;
 
