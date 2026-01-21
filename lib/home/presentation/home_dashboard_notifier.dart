@@ -8,7 +8,11 @@ class HomeDashboardNotifier extends ChangeNotifier {
 
   void getCards() async {
     final cards = await cardRepository.getCards();
-    this.cards = cards.cards;
+
+    if (cards.cards != null && cards.cards!.isNotEmpty)
+      this.cards = cards.cards;
+    else
+      this.cards = List.filled(10, Card(0, "Artorias The Abyss Walker", "", CardType.Character, List.empty()));
     notifyListeners();
   }
 }

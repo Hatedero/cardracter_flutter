@@ -13,7 +13,7 @@ abstract class Api {
   factory Api() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: "link",
+        baseUrl: "https://localhost:3000/",
         contentType: "application/json"
       )
     );

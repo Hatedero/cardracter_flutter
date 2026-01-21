@@ -5,9 +5,9 @@ import '../../app/model/card.dart';
 import '../../app/widgets/app_bottom_bar.dart';
 
 class NewCardView extends StatefulWidget {
-  const NewCardView({super.key, required this.title});
+  const NewCardView({super.key});
 
-  final String title;
+  final String title = "Create a card";
 
   @override
   State<NewCardView> createState() => _NewCardViewState();

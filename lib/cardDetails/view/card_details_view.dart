@@ -4,9 +4,9 @@ import 'package:flutter/material.dart' hide Card;
 import '../../app/model/card.dart';
 
 class CardDetailsView extends StatefulWidget {
-  const CardDetailsView({super.key, required this.title});
+  const CardDetailsView({super.key});
 
-  final String title;
+  final String title = "Card details";
 
   @override
   State<CardDetailsView> createState() => _HomeDashboardViewState();
