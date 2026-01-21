@@ -1,7 +1,7 @@
 import 'package:cardracter_flutter/cardDetails/view/card_details_view.dart';
 import 'package:cardracter_flutter/home/presentation/home_dashboard_notifier.dart';
 import 'package:cardracter_flutter/home/presentation/home_dashboard_view.dart';
-import 'package:cardracter_flutter/newCard/view/new_card_view.dart';
+import 'package:cardracter_flutter/newCard/presentation/new_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
