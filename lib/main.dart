@@ -1,6 +1,8 @@
-import 'package:cardracter_flutter/cardDetails/view/cardDetailsView.dart';
-import 'package:cardracter_flutter/home/presentation/homeDashboardView.dart';
+import 'package:cardracter_flutter/cardDetails/view/card_details_view.dart';
+import 'package:cardracter_flutter/home/presentation/home_dashboard_notifier.dart';
+import 'package:cardracter_flutter/home/presentation/home_dashboard_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,19 +11,23 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HomeDashboardNotifier()),
+      ],
+      child: MaterialApp(
+        initialRoute: "/home",
+        title: 'Cardracter',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        routes: {
+          "/home": (context) => HomeDashboardView(),
+          "/cardDetails": (context) => CardDetailsView(title: "card details"),
+        },
       ),
-      routes: {
-        "/home" : (context) => HomeDashboardView(title: "Dashboard"),
-        "/cardDetails" : (context) => CardDetailsView(title: "card details")
-      },
-      home: const HomeDashboardView(title: 'Dashboard'),
     );
   }
 }
