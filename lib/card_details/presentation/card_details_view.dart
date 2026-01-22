@@ -1,8 +1,10 @@
-import 'package:cardracter_flutter/app/widgets/card_preview.dart';
+import 'package:cardracter_flutter/card_details/presentation/card_details_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 import '../../app/widgets/app_bottom_bar.dart';
 import '../../app/model/card.dart';
+import 'package:provider/provider.dart';
+
 
 class CardDetailsView extends StatefulWidget {
 
@@ -14,27 +16,54 @@ class CardDetailsView extends StatefulWidget {
   final Card card;
   final String title = "Card details";
 
-
   @override
   State<CardDetailsView> createState() => _CardDetailsViewState();
 }
 
 class _CardDetailsViewState extends State<CardDetailsView> {
+
   @override
-  Widget build(BuildContext context) {
-    final card = widget.card;
-
-    switch (card.type) {
-      case CardType.Character:
-        return _buildCharacterCard(context, card);
-
-      case CardType.Collection:
-        return _buildCollectionCard(context, card);
-    }
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      context.read<CardDetailsNotifier>().getCard();
+    });
   }
 
-  /// === Character / Multi-category card ===
-  Widget _buildCharacterCard(BuildContext context, Card card) {
+  @override
+  Widget build(BuildContext context) {
+    final card = context
+        .watch<CardDetailsNotifier>()
+        .card ?? widget.card;
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        bottomNavigationBar: const AppBottomBar(),
+        body: choseCardDetailBody(card)
+    );
+  }
+
+  Widget choseCardDetailBody(Card card) {
+    switch (card.type) {
+      case CardType.Character:
+        return _CharacterDetailsViewBody(card: card);
+      case CardType.Collection:
+        return _CollectionDetailsViewBody(card: card);
+      default:
+        return _CollectionDetailsViewBody(card: card);
+    }
+  }
+}
+
+class _CharacterDetailsViewBody extends StatelessWidget {
+
+  const _CharacterDetailsViewBody({required this.card});
+  final Card card;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         // Image section
@@ -97,7 +126,7 @@ class _CardDetailsViewState extends State<CardDetailsView> {
                                 color: Colors.purpleAccent,
                               ),
                             ),
-                           for (final attribute in category.attributes)
+                            for (final attribute in category.attributes)
                               Text(
                                 attribute.value ?? "no value",
                                 style: const TextStyle(fontSize: 20),
@@ -118,9 +147,16 @@ class _CardDetailsViewState extends State<CardDetailsView> {
       ],
     );
   }
+}
 
+class _CollectionDetailsViewBody extends StatelessWidget {
   /// === Collection card (empty for now, same as Compose) ===
-  Widget _buildCollectionCard(BuildContext context, Card card) {
+
+  const _CollectionDetailsViewBody({required this.card});
+  final Card card;
+
+  @override
+  Widget build(BuildContext context) {
     return const SizedBox.shrink();
   }
 }
