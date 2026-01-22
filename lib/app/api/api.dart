@@ -1,4 +1,6 @@
 
+import 'package:cardracter_flutter/app/model/attribute_data.dart';
+import 'package:cardracter_flutter/app/model/category.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
@@ -27,4 +29,7 @@ abstract class Api {
 
   @GET("cards/")
   Future<Cards> getCards();
+
+  @POST("card/")
+  Future<bool> saveCard(Card card);
 }

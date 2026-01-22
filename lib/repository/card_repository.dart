@@ -8,7 +8,11 @@ final cardRepository = _CardRepository();
 
 class _CardRepository {
 
-  Future<Cards> getCards() async{
+  Future<Cards> getCards() async {
     return apiCard.getCards();
+  }
+
+  Future<bool> saveCard(Card card) async {
+    return apiCard.saveCard(card);
   }
 }

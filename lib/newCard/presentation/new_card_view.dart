@@ -7,72 +7,104 @@ import '../../app/model/card.dart';
 import '../../app/model/category.dart';
 import 'new_card_notifier.dart';
 
-class NewCardView extends StatelessWidget {
-  /*final Card card = Card(0, "Artorias the abyss walker", "", CardType.Character, List.filled(5,
-  Category(0, "History : ", 0, List.filled(3,
-  Attribute(0, "attribute title", "Died in Oolacile.", 0)))));*/
+class NewCardView extends StatefulWidget {
+  @override
+  State<NewCardView> createState() => _NewCardViewState();
+}
+
+class _NewCardViewState extends State<NewCardView> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      final notifier = context.read<NewCardNotifier>();
+      notifier.createCard();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final notifier = context.watch<NewCardNotifier>();
 
-    notifier.createCard();
+    var card = context.watch<NewCardNotifier>().card;
 
-    var card = notifier.card;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Edition"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (card.image.isNotEmpty)
-              Image.asset(
-                card.image,
-                width: double.infinity,
-                height: 300,
-                fit: BoxFit.cover,
-              )
-            else
-              Container(
-                height: 200,
-                width: double.infinity,
-                color: Colors.grey.shade200,
-                child: const Icon(Icons.image_not_supported, size: 50),
-              ),
-
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  AppTextField(
-                    defaultValue: card.title,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    onFinished: (value) =>
-                        notifier.modifyCardTitle(newTitle: value),
-                  ),
-                  const Divider(height: 32),
-
-                  ...card.categories.map(
-                    (category) => _buildCategorySection(context, category),
-                  ),
-                ],
-              ),
-            ),
-          ],
+    if (card != null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Edition"),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-      ),
-    );
+        floatingActionButton:  FloatingActionButton(
+          onPressed: () {
+            notifier.saveCard();
+          },
+          child: const Icon(Icons.check),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (card.image.isNotEmpty)
+                Image.asset(
+                  card.image,
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                )
+              else
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  color: Colors.grey.shade200,
+                  child: const Icon(Icons.image_not_supported, size: 50),
+                ),
+
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    AppTextField(
+                      defaultValue: card.title,
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      onFinished: (value) =>
+                          notifier.modifyCardTitle(newTitle: value),
+                    ),
+                    const Divider(height: 32),
+
+                    ...card.categories.map(
+                      (category) => _buildCategorySection(context, category),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: Text('Nouvelle Catégorie'),
+                          onPressed: notifier.addNewCategory,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return Text("No card");
   }
 
   Widget _buildCategorySection(BuildContext context, Category category) {
+    final notifier = context.watch<NewCardNotifier>();
+
+    void addAttribute() {
+      notifier.addNewAttribute(category.categoryId);
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -85,26 +117,32 @@ class NewCardView extends StatelessWidget {
               letterSpacing: 1.2,
               color: Colors.blueGrey,
             ),
-            onFinished: (String) => (),
+            onFinished: (title) {
+              notifier.modifyCategoryTitle(newTitle: title, categoryId: category.categoryId);
+              },
           ),
         ),
         ...category.attributes.map(
-          (attr) => Padding(
+          (attribute) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: Row(
               children: [
                 Expanded(
-                  child: AppTextField(
-                    defaultValue: attr.value ?? 'N/A',
-                    onFinished: (newValue) {
-                      print("User finished typing: $newValue");
-                    },
+                  child: Padding(
+                    padding: EdgeInsetsGeometry.fromLTRB(15, 0, 0, 0),
+                    child: AppTextField(
+                      defaultValue: attribute.value ?? 'N/A',
+                      onFinished: (newValue) {
+                        notifier.modifyAttributeValue(newValue: newValue, attributeId: attribute.attributeId!, categoryId: category.categoryId);
+                      },
+                    ),
                   ),
                 ),
               ],
             ),
           ),
         ),
+        ElevatedButton(child: Text('Nouvel Attribut'), onPressed: addAttribute),
         const SizedBox(height: 16),
       ],
     );
