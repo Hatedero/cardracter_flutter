@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import 'attribute_data.dart';
-
 part 'category.g.dart';
 
 @JsonSerializable(explicitToJson: true)

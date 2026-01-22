@@ -1,9 +1,7 @@
 import 'package:cardracter_flutter/app/widgets/category_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
-
 import '../model/card.dart';
-
 
 class CardView extends StatelessWidget {
   const CardView({super.key, required this.card});
