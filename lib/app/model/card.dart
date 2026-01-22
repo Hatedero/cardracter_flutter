@@ -11,7 +11,23 @@ class Card {
   final CardType type;
   final List<Category> categories;
 
-  Card(this.id,  this.title,  this.image,  this.type,  this.categories);
+  Card(this.id, this.title, this.image, this.type, this.categories);
+
+  Card copyWith({
+    int? id,
+    String? title,
+    String? image,
+    CardType? type,
+    List<Category>? categories
+  }) {
+    return Card(
+      id = id ?? this.id,
+      title = title ?? this.title,
+      image = image ?? this.image,
+      type = type ?? this.type,
+      categories = categories ?? this.categories,
+    );
+  }
 
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
   Map<String, dynamic> toJson() => _$CardToJson(this);

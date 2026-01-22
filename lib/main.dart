@@ -6,6 +6,9 @@ import 'package:cardracter_flutter/new_card/view/new_card_view.dart';
 import 'package:cardracter_flutter/home/presentation/home_dashboard_view.dart';
 import 'package:cardracter_flutter/home/presentation/home_dashboard_notifier.dart';
 import 'package:flutter/material.dart' hide Card;
+import 'package:cardracter_flutter/newCard/presentation/new_card_notifier.dart';
+import 'package:cardracter_flutter/newCard/presentation/new_card_view.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app/model/card.dart';
 import 'generated/assets.dart';
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HomeDashboardNotifier()),
+        ChangeNotifierProvider(create: (context) => NewCardNotifier())
       ],
       child: MaterialApp(
         initialRoute: "/home",
