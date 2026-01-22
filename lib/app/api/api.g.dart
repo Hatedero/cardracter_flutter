@@ -32,7 +32,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'cards/',
+              'cards',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -42,6 +42,33 @@ class _Api implements Api {
               baseUrl,
             ))));
     final value = Cards.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<Card> getCard(int cardId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Card>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'card?id=${cardId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Card.fromJson(_result.data!);
     return value;
   }
 

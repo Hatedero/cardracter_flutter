@@ -1,9 +1,6 @@
-
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-
 import '../model/card.dart';
-
 part 'api.g.dart';
 
 final apiCard = Api();
@@ -13,10 +10,12 @@ abstract class Api {
   factory Api() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: "https://localhost:3000/",
+        baseUrl: "https://localhost:8000/",
         contentType: "application/json"
       )
     );
+
+    dio.options.connectTimeout = Duration(seconds: 5000); // 5 seconds
 
     dio.interceptors.add(LogInterceptor
       (requestBody: true,
@@ -25,6 +24,9 @@ abstract class Api {
     return _Api(dio);
   }
 
-  @GET("cards/")
+  @GET("cards")
   Future<Cards> getCards();
+
+  @GET("card?id={cardId}")
+  Future<Card> getCard(@Path() int cardId);
 }
