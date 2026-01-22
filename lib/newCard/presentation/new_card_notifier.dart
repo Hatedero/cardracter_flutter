@@ -1,22 +1,32 @@
 import 'package:cardracter_flutter/app/model/card.dart';
-import 'package:cardracter_flutter/home/repository/card_repository.dart';
+import 'package:cardracter_flutter/app/model/category.dart';
+import 'package:cardracter_flutter/repository/card_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class NewCardNotifier extends ChangeNotifier {
 
-  Card? card;
+  late Card card;
+  int lastCategoryId = -1;
+  int lastAttributeId = -1;
 
-  void getCard() async {
-    //final card = await cardRepository.getCards();
-    final card = Card(0, "Artorias The Abyss Walker", "", CardType.Character, List.empty());
-
-    /*if (cards.cards != null && cards.cards!.isNotEmpty)
-      this.card = cards.cards.first;
-    else
-      this.card = Card(0, "Artorias The Abyss Walker", "", CardType.Character, List.empty());*/
+  void createCard() {
+    final card = Card(0, "New Card", "", CardType.Character, List.empty());
 
     this.card = card;
 
+
     notifyListeners();
+  }
+
+  void addNewCategory() {
+    var newCategories = card.categories.toList();
+    newCategories.add(Category(lastCategoryId + 1, "New Category", card.id, List.empty()));
+
+    this.card = card.copyWith(categories: newCategories);
+    lastCategoryId += 1;
+  }
+
+  void modifyCardTitle({required String newTitle}) {
+    this.card = card.copyWith(title: newTitle);
   }
 }

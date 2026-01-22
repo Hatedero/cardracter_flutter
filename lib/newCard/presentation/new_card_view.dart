@@ -1,15 +1,25 @@
 import 'package:cardracter_flutter/app/model/attribute_data.dart';
+import 'package:cardracter_flutter/app/widgets/app_text_field.dart';
+import 'package:cardracter_flutter/newCard/presentation/new_card_notifier.dart';
 import 'package:flutter/material.dart' hide Card;
+import 'package:provider/provider.dart';
 import '../../app/model/card.dart';
 import '../../app/model/category.dart';
+import 'new_card_notifier.dart';
 
 class NewCardView extends StatelessWidget {
-  final Card card = Card(0, "Artorias the abyss walker", "", CardType.Character, List.filled(5,
+  /*final Card card = Card(0, "Artorias the abyss walker", "", CardType.Character, List.filled(5,
   Category(0, "History : ", 0, List.filled(3,
-  Attribute(0, "attribute title", "Died in Oolacile.", 0)))));
+  Attribute(0, "attribute title", "Died in Oolacile.", 0)))));*/
 
   @override
   Widget build(BuildContext context) {
+    final notifier = context.watch<NewCardNotifier>();
+
+    notifier.createCard();
+
+    var card = notifier.card;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Edition"),
@@ -40,13 +50,19 @@ class NewCardView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 8),
-                  Text(
-                    card.title,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                  AppTextField(
+                    defaultValue: card.title,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    onFinished: (value) =>
+                        notifier.modifyCardTitle(newTitle: value),
                   ),
                   const Divider(height: 32),
 
-                  ...card.categories.map((category) => _buildCategorySection(context, category)),
+                  ...card.categories.map(
+                    (category) => _buildCategorySection(context, category),
+                  ),
                 ],
               ),
             ),
@@ -62,19 +78,33 @@ class NewCardView extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
-            category.title.toUpperCase(),
-            style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, color: Colors.blueGrey),
+          child: AppTextField(
+            defaultValue: category.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+              color: Colors.blueGrey,
+            ),
+            onFinished: (String) => (),
           ),
         ),
-        ...category.attributes.map((attr) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: Row(
-            children: [
-              TextField( maxLines: 1000, (attr.value ?? 'N/A')),
-            ],
+        ...category.attributes.map(
+          (attr) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: AppTextField(
+                    defaultValue: attr.value ?? 'N/A',
+                    onFinished: (newValue) {
+                      print("User finished typing: $newValue");
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
         const SizedBox(height: 16),
       ],
     );
