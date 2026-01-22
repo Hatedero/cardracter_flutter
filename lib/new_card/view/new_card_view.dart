@@ -29,7 +29,7 @@ class _NewCardViewState extends State<NewCardView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton.icon(
-                onPressed: () => Navigator.of(context).pushNamed("/cardDetails"),
+                onPressed: () => Navigator.of(context).pushNamed("/card_details"),
                 icon: Icon(Icons.info),
                 label: const Text("go to detail"),
             ),
