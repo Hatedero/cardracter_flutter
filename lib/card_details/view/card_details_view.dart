@@ -10,10 +10,10 @@ class CardDetailsView extends StatefulWidget {
   final String title = "Card details";
 
   @override
-  State<CardDetailsView> createState() => _HomeDashboardViewState();
+  State<CardDetailsView> createState() => _CardDetailsViewState();
 }
 
-class _HomeDashboardViewState extends State<CardDetailsView> {
+class _CardDetailsViewState extends State<CardDetailsView> {
   List<Card> cards = List.empty();
 
   @override
