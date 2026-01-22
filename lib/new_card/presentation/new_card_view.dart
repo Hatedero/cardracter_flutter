@@ -1,9 +1,6 @@
-import 'package:cardracter_flutter/app/model/attribute_data.dart';
 import 'package:cardracter_flutter/app/widgets/app_text_field.dart';
-import 'package:cardracter_flutter/newCard/presentation/new_card_notifier.dart';
 import 'package:flutter/material.dart' hide Card;
 import 'package:provider/provider.dart';
-import '../../app/model/card.dart';
 import '../../app/model/category.dart';
 import 'new_card_notifier.dart';
 
