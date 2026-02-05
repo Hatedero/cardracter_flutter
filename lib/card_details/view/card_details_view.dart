@@ -1,18 +1,19 @@
 import 'package:cardracter_flutter/app/widgets/card_preview.dart';
+import 'package:cardracter_flutter/card_details/view/card_details_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 import '../../app/widgets/app_bottom_bar.dart';
 import '../../app/model/card.dart';
+import 'package:provider/provider.dart';
 
 class CardDetailsView extends StatefulWidget {
 
   const CardDetailsView({
     Key? key,
-    required this.card,
+    required this.cardId,
   }) : super(key: key);
 
-  final Card card;
-  final String title = "Card details";
+  final int cardId;
 
 
   @override
@@ -20,20 +21,37 @@ class CardDetailsView extends StatefulWidget {
 }
 
 class _CardDetailsViewState extends State<CardDetailsView> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      final notifier = context.read<CardDetailsNotifier>();
+      notifier.getCard(widget.cardId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final card = widget.card;
 
-    switch (card.type) {
-      case CardType.Character:
-        return _buildCharacterCard(context, card);
+    final notifier = context.watch<CardDetailsNotifier>();
 
-      case CardType.Collection:
-        return _buildCollectionCard(context, card);
+    var card = context.watch<CardDetailsNotifier>().card;
+
+    if (card != null) {
+      switch (card.type) {
+        case CardType.Character:
+          return _buildCharacterCard(context, card);
+
+        case CardType.Collection:
+          return _buildCollectionCard(context, card);
+      }
+    } else {
+      return Text("Card isn't ready yet");
     }
   }
 
-  /// === Character / Multi-category card ===
   Widget _buildCharacterCard(BuildContext context, Card card) {
     return Column(
       children: [
@@ -119,7 +137,6 @@ class _CardDetailsViewState extends State<CardDetailsView> {
     );
   }
 
-  /// === Collection card (empty for now, same as Compose) ===
   Widget _buildCollectionCard(BuildContext context, Card card) {
     return const SizedBox.shrink();
   }

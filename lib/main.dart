@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:cardracter_flutter/ModifyCard/presentation/modify_card_view.dart';
 import 'package:cardracter_flutter/account/view/account_view.dart';
 import 'package:cardracter_flutter/app/model/attribute_data.dart';
 import 'package:cardracter_flutter/app/model/category.dart';
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
         routes: {
           "/home" : (context) => HomeDashboardView(),
           "/new_card" : (context) => NewCardView(),
-          "/card_details" : (context) => CardDetailsView(card:card),
+          "/modify_card" : (context) => ModifyCardView(),
+          "/card_details" : (context) => CardDetailsView(cardId: 0),
           "/account" : (context) => AccountView(title: "account"),
           "/log_out" : (context) => HomeDashboardView(),
         },

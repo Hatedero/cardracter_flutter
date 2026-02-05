@@ -46,6 +46,33 @@ class _Api implements Api {
   }
 
   @override
+  Future<Card> getCard(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Card>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'card/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Card.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<bool> saveCard(Card card) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

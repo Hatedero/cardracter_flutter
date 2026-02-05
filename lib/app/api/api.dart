@@ -30,6 +30,9 @@ abstract class Api {
   @GET("cards/")
   Future<Cards> getCards();
 
+  @GET("card/")
+  Future<Card> getCard(int id);
+
   @POST("card/")
   Future<bool> saveCard(Card card);
 }
