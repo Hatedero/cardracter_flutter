@@ -102,6 +102,15 @@ class _CharacterDetailsViewBody extends StatelessWidget {
                         color: Colors.purple,
                       ),
                     ),
+                    Text(
+                      card.description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                   ],
                 ),
