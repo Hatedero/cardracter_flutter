@@ -45,6 +45,12 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
 }
 
 class _HomeDashBoardBody extends StatelessWidget {
+  final ButtonStyle outlineButtonStyle = OutlinedButton.styleFrom(
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(15)),
+    ),
+    padding: const EdgeInsetsGeometry.all(0)
+  );
   @override
   Widget build(BuildContext context) {
 
@@ -63,7 +69,13 @@ class _HomeDashBoardBody extends StatelessWidget {
       ),
       itemBuilder: (BuildContext context, int index) {
         if (cards?[index] != null)
-          return CardPreview(card: cards![index]);
+          return OutlinedButton(
+            style: outlineButtonStyle,
+            onPressed: (){
+              Navigator.of(context).pushNamed("/card_details", arguments : {cards![index]});
+              } ,
+            child : CardPreview(card: cards![index])
+          );
       },
     );
   }
