@@ -15,7 +15,7 @@ abstract class Api {
       )
     );
 
-    dio.options.connectTimeout = Duration(seconds: 5000); // 5 seconds
+    dio.options.connectTimeout = Duration(seconds: 50000); // 5 seconds
 
     dio.interceptors.add(LogInterceptor
       (requestBody: true,
@@ -23,10 +23,12 @@ abstract class Api {
         responseBody: true));
     return _Api(dio);
   }
-
-  @GET("cards")
+  @GET("cards_with_all_attributes")
   Future<Cards> getCards();
 
   @GET("card_with_all_attributes")
   Future<Card> getCard(@Query("id") int cardId);
+
+  @POST("card")
+  Future<Card> postCard(@Query("title,image,type") String title, String image, String type);
 }

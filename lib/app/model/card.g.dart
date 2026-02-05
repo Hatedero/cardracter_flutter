@@ -17,7 +17,7 @@ Card _$CardFromJson(Map<String, dynamic> json) => Card(
     );
 
 Map<String, dynamic> _$CardToJson(Card instance) => <String, dynamic>{
-      'id': instance.cardId,
+      'cardId': instance.cardId,
       'title': instance.title,
       'image': instance.image,
       'type': _$CardTypeEnumMap[instance.type]!,

@@ -11,7 +11,11 @@ class _CardRepository {
   }
 
   Future<Card> getCard(int cardId) async{
-    print("called getCard!");
+    print("called getCard !");
     return apiCard.getCard(cardId);
+  }
+
+  Future<void> postCard(String title, String image, String type) async{
+    print("Posted !");
   }
 }

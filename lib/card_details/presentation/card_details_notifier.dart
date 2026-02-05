@@ -7,7 +7,7 @@ class CardDetailsNotifier extends ChangeNotifier {
   Card? card;
 
   void getCard() async {
-    final card = await cardRepository.getCard(1);
+    final card = await cardRepository.getCard(4);
 
     if (card != null)
       this.card = card;

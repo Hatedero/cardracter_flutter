@@ -128,7 +128,7 @@ class _CharacterDetailsViewBody extends StatelessWidget {
                             ),
                             for (final attribute in category.attributes)
                               Text(
-                                attribute.value ?? "no value",
+                                (attribute.title ?? "title")+" : "+(attribute.value ?? "no value"),
                                 style: const TextStyle(fontSize: 20),
                                 textAlign: TextAlign.left,
                               ),
