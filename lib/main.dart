@@ -10,6 +10,8 @@ import 'package:flutter/material.dart' hide Card;
 import 'package:provider/provider.dart';
 import 'app/model/card.dart';
 import 'generated/assets.dart';
+import 'new_card/presentation/new_card_notifier.dart';
+import 'new_card/presentation/new_card_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeDashboardNotifier()),
         ChangeNotifierProvider(create: (context) => CardDetailsNotifier()),
 
+        ChangeNotifierProvider(create: (context) => NewCardNotifier())
       ],
       child: MaterialApp(
         initialRoute: "/home",

@@ -15,7 +15,7 @@ class _CardRepository {
     return apiCard.getCard(cardId);
   }
 
-  Future<void> postCard(String title, String image, String type) async{
-    print("Posted !");
+  Future<bool> saveCard(Card card) async {
+    return apiCard.saveCard(card);
   }
 }
