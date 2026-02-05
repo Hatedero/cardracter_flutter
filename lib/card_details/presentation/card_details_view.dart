@@ -5,6 +5,8 @@ import '../../app/widgets/app_bottom_bar.dart';
 import '../../app/model/card.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/assets.dart';
+
 
 class CardDetailsView extends StatefulWidget {
 
@@ -72,7 +74,7 @@ class _CharacterDetailsViewBody extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              card.image,
+              Assets.imagesArtorias,
               fit: BoxFit.contain,
               height: MediaQuery
                   .of(context)
