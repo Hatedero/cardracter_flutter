@@ -3,15 +3,14 @@ import 'package:cardracter_flutter/app/model/attribute_data.dart';
 import 'package:cardracter_flutter/app/model/category.dart';
 import 'package:cardracter_flutter/card_details/presentation/card_details_notifier.dart';
 import 'package:cardracter_flutter/card_details/presentation/card_details_view.dart';
-import 'package:cardracter_flutter/new_card/view/new_card_view.dart';
+import 'new_card/presentation/new_card_notifier.dart';
+import 'new_card/presentation/new_card_view.dart';
 import 'package:cardracter_flutter/home/presentation/home_dashboard_view.dart';
 import 'package:cardracter_flutter/home/presentation/home_dashboard_notifier.dart';
 import 'package:flutter/material.dart' hide Card;
 import 'package:provider/provider.dart';
 import 'app/model/card.dart';
 import 'generated/assets.dart';
-import 'new_card/presentation/new_card_notifier.dart';
-import 'new_card/presentation/new_card_view.dart';
 
 void main() {
   runApp(const MyApp());

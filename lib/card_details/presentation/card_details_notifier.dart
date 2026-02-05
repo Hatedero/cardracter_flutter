@@ -1,6 +1,6 @@
 import 'package:cardracter_flutter/app/model/card.dart';
-import 'package:cardracter_flutter/home/repository/card_repository.dart';
 import 'package:flutter/cupertino.dart';
+import '../../repository/card_repository.dart';
 
 class CardDetailsNotifier extends ChangeNotifier {
 
