@@ -7,12 +7,12 @@ class CardDetailsNotifier extends ChangeNotifier {
   Card? card;
 
   void getCard() async {
-    final card = await cardRepository.getCard(4);
+    final card = await cardRepository.getCard(1);
 
     if (card != null)
       this.card = card;
     else
-      this.card = Card(0, "Artorias The Abyss Walker", "", CardType.Character, List.empty());
+      this.card = Card(0, "Artorias", "", "The Abyss Walker", CardType.Character, List.empty());
     notifyListeners();
   }
 }

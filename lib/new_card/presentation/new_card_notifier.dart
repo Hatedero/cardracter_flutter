@@ -4,6 +4,8 @@ import 'package:cardracter_flutter/app/model/category.dart';
 import 'package:cardracter_flutter/repository/card_repository.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../generated/assets.dart';
+
 class NewCardNotifier extends ChangeNotifier {
   late Card card;
   int lastCategoryId = -1;
@@ -11,7 +13,7 @@ class NewCardNotifier extends ChangeNotifier {
 
   void createCard() {
     print("CREATE CARD");
-    card = Card(0, "New Card", "", CardType.Character, List.empty());
+    card = Card(0, "New Card", Assets.imagesArtorias, "description",  CardType.Character,List.empty());
 
     this.card = card;
 

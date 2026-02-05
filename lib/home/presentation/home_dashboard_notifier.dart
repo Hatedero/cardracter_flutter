@@ -15,7 +15,7 @@ class HomeDashboardNotifier extends ChangeNotifier {
     else if (card != null && card.cardId!=0)
       this.cards = List.filled(10,card);
     else
-      this.cards = List.filled(10, Card(0, "Artorias The Abyss Walker", "", CardType.Character, List.empty()));
+      this.cards = List.filled(10, Card(0, "Artorias", ""," The Abyss Walker", CardType.Character, List.empty()));
     print(this.cards?.first.image);
     notifyListeners();
   }

@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    final Card card = Card(-1,"JeanPhilipe",Assets.imagesArtorias,CardType.Character,
+    final Card card = Card(-1,"JeanPhilipe",Assets.imagesArtorias,"The best debug card ever!",CardType.Character,
         List.filled(4,Category(-1,"test category !",-1,
             List.filled(2,Attribute(-1,"test attribute"," whoa! A debug feature !",-1))
         ))
