@@ -8,15 +8,16 @@ class Card {
   final int cardId;
   final String title;
   final String image;
+  final String description;
   final CardType type;
   final List<Category> categories;
-
-  Card(this.cardId, this.title, this.image, this.type, this.categories);
+  Card(this.cardId, this.title, this.image, this.description, this.type, this.categories);
 
   Card copyWith({
     int? cardId,
     String? title,
     String? image,
+    String? description,
     CardType? type,
     List<Category>? categories
   }) {
@@ -24,6 +25,7 @@ class Card {
       cardId = cardId ?? this.cardId,
       title = title ?? this.title,
       image = image ?? this.image,
+      description = description ?? this.description,
       type = type ?? this.type,
       categories = categories ?? this.categories,
     );
