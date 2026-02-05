@@ -1,6 +1,7 @@
 import 'package:cardracter_flutter/app/widgets/category_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
+import '../../generated/assets.dart';
 import '../model/card.dart';
 
 class CardPreview extends StatelessWidget {
@@ -34,7 +35,7 @@ class CardPreview extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (card.image.isNotEmpty) ...[
+              if (card.image.isNotEmpty && card.image!="") ...[
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -46,7 +47,16 @@ class CardPreview extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
               ] else ...[
-                const Spacer(),
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      Assets.imagesDefaultPp,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
               ],
               Text(
                 card.title,

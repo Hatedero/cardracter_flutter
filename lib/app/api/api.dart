@@ -15,10 +15,12 @@ abstract class Api {
   factory Api() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: "https://localhost:3000/",
+        baseUrl: "http://10.0.2.2:8000/",
         contentType: "application/json"
       )
     );
+
+    dio.options.connectTimeout = Duration(seconds: 50000); // 5 seconds
 
     dio.interceptors.add(LogInterceptor
       (requestBody: true,
@@ -26,12 +28,11 @@ abstract class Api {
         responseBody: true));
     return _Api(dio);
   }
-
-  @GET("cards/")
+  @GET("cards_with_all_attributes")
   Future<Cards> getCards();
 
-  @GET("card/")
-  Future<Card> getCard(int id);
+  @GET("card_with_all_attributes")
+  Future<Card> getCard(@Query("id") int cardId);
 
   @POST("card/")
   Future<bool> saveCard(Card card);

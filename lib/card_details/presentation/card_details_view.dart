@@ -1,10 +1,10 @@
 import 'package:cardracter_flutter/app/widgets/card_preview.dart';
-import 'package:cardracter_flutter/card_details/view/card_details_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
+import 'package:provider/provider.dart';
 import '../../app/widgets/app_bottom_bar.dart';
 import '../../app/model/card.dart';
-import 'package:provider/provider.dart';
+import 'card_details_notifier.dart';
 
 class CardDetailsView extends StatefulWidget {
 

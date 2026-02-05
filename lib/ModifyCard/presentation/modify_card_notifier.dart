@@ -1,9 +1,10 @@
 import 'package:cardracter_flutter/app/model/attribute_data.dart';
-import 'package:cardracter_flutter/app/model/card.dart';
 import 'package:cardracter_flutter/app/model/category.dart';
-import 'package:cardracter_flutter/repository/card_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+
+import '../../Repository/card_repository.dart';
+import '../../app/model/card.dart';
 
 class ModifyCardNotifier extends ChangeNotifier {
   late Card card;
@@ -27,7 +28,7 @@ class ModifyCardNotifier extends ChangeNotifier {
   void addNewCategory() {
     var newCategories = card.categories.toList();
     newCategories.add(
-      Category(lastCategoryId + 1, "New Category", card.id, List.empty()),
+      Category(lastCategoryId + 1, "New Category", card.cardId, List.empty()),
     );
 
     this.card = card.copyWith(categories: newCategories);
