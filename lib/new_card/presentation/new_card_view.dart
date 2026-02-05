@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cardracter_flutter/app/widgets/app_text_field.dart';
 import 'package:flutter/material.dart' hide Card;
 import 'package:provider/provider.dart';
@@ -32,7 +34,7 @@ class _NewCardViewState extends State<NewCardView> {
           title: Text("Edition"),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-        floatingActionButton:  FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             notifier.saveCard();
           },
@@ -102,46 +104,81 @@ class _NewCardViewState extends State<NewCardView> {
       notifier.addNewAttribute(category.categoryId);
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: AppTextField(
-            defaultValue: category.title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
-              color: Colors.blueGrey,
-            ),
-            onFinished: (title) {
-              notifier.modifyCategoryTitle(newTitle: title, categoryId: category.categoryId);
+    void deleteCategory(int id) {
+      notifier.deleteCategory(id);
+    }
+
+    void deleteAttribute(int id) {
+      notifier.deleteAttribute(id);
+    }
+
+    return Dismissible(
+      key: Key(category.categoryId.toString()),
+      onDismissed: (direction) {
+        deleteCategory(category.categoryId);
+      },
+      background: Container(color: Colors.red, child: Icon(Icons.delete)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: AppTextField(
+              defaultValue: category.title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+                color: Colors.blueGrey,
+              ),
+              onFinished: (title) {
+                notifier.modifyCategoryTitle(
+                  newTitle: title,
+                  categoryId: category.categoryId,
+                );
               },
-          ),
-        ),
-        ...category.attributes.map(
-          (attribute) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsGeometry.fromLTRB(15, 0, 0, 0),
-                    child: AppTextField(
-                      defaultValue: attribute.value ?? 'N/A',
-                      onFinished: (newValue) {
-                        notifier.modifyAttributeValue(newValue: newValue, attributeId: attribute.attributeId!, categoryId: category.categoryId);
-                      },
-                    ),
-                  ),
-                ),
-              ],
             ),
           ),
-        ),
-        ElevatedButton(child: Text('Nouvel Attribut'), onPressed: addAttribute),
-        const SizedBox(height: 16),
-      ],
+          ...category.attributes.map(
+            (attribute) => Dismissible(
+              key: Key(attribute.attributeId.toString()),
+              onDismissed: (direction) {
+                deleteAttribute(attribute.attributeId);
+              },
+              background: Container(
+                color: Colors.red,
+                child: Icon(Icons.delete),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.fromLTRB(15, 0, 0, 0),
+                        child: AppTextField(
+                          defaultValue: attribute.value ?? 'N/A',
+                          onFinished: (newValue) {
+                            notifier.modifyAttributeValue(
+                              newValue: newValue,
+                              attributeId: attribute.attributeId,
+                              categoryId: category.categoryId,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            child: Text('Nouvel Attribut'),
+            onPressed: addAttribute,
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 }

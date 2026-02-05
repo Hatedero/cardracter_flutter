@@ -31,7 +31,6 @@ class NewCardNotifier extends ChangeNotifier {
 
     this.card = card.copyWith(categories: newCategories);
     lastCategoryId += 1;
-    print(this.card.categories);
     notifyListeners();
   }
 
@@ -68,6 +67,52 @@ class NewCardNotifier extends ChangeNotifier {
       notifyListeners();
     } else
       print("Error when fetching category");
+  }
+
+  void deleteCategory(int categoryId) {
+    print("DELETE CATEGORY " + categoryId.toString());
+    var newCategories = card.categories.toList();
+    newCategories.removeWhere((category) => category.categoryId == categoryId);
+
+    this.card = card.copyWith(categories: newCategories);
+    notifyListeners();
+  }
+
+  void deleteAttribute(int attributeId) {
+    print("DELETE ATTRIBUTE " + attributeId.toString());
+
+    Category? categoryToModify;
+    Attribute? attributeToDelete;
+
+    card.categories.forEach((category) {
+      category.attributes.forEach((attribute) {
+        if (attribute.attributeId == attributeId) {
+          categoryToModify = category;
+          attributeToDelete = attribute;
+        }
+      });
+    });
+
+    var newAttributes = categoryToModify?.attributes.toList();
+
+    if (categoryToModify != null && newAttributes != null) {
+      newAttributes.remove(attributeToDelete);
+
+      categoryToModify = categoryToModify!.copyWith(attributes: newAttributes);
+
+      List<Category> newCategories = card.categories.toList();
+
+      int index = 0;
+      newCategories.forEach((categoryToReplace) {
+        if (categoryToReplace.categoryId == categoryToModify!.categoryId) {
+          newCategories[index] = categoryToModify!;
+        }
+        index += 1;
+      });
+
+      this.card = card.copyWith(categories: newCategories);
+      notifyListeners();
+    }
   }
 
   void modifyCardTitle({required String newTitle}) {
