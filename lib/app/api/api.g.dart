@@ -46,32 +46,6 @@ class _Api implements Api {
   }
 
   @override
-  Future<bool> saveCard(Card card) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<bool>(_setStreamType<bool>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'card/',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data!;
-    return value;
-  }
-
-  @override
   Future<Card> getCard(int cardId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': cardId};
@@ -99,33 +73,28 @@ class _Api implements Api {
   }
 
   @override
-  Future<Card> postCard(
-    String title,
-    String image,
-    String type,
-  ) async {
+  Future<int> saveCard(Card card) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'title,image,type': title};
+    final queryParameters = <String, dynamic>{r'': card.toJson()};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Card>(Options(
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'card',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = Card.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'card_with_all_attributes?card=',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
     return value;
   }
 

@@ -32,6 +32,6 @@ abstract class Api {
   @GET("card_with_all_attributes")
   Future<Card> getCard(@Query("id") int cardId);
 
-  @POST("card/")
-  Future<bool> saveCard(Card card);
+  @POST("card_with_all_attributes?card=")
+  Future<int> saveCard(@Query("") Card card);
 }

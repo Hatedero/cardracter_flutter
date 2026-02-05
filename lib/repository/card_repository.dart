@@ -15,7 +15,7 @@ class _CardRepository {
     return apiCard.getCard(cardId);
   }
 
-  Future<bool> saveCard(Card card) async {
+  Future<int> saveCard(Card card) async {
     return apiCard.saveCard(card);
   }
 }
