@@ -5,13 +5,13 @@ part 'card.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Card {
-  final int id;
+  final int cardId;
   final String title;
   final String image;
   final CardType type;
   final List<Category> categories;
 
-  Card(this.id,  this.title,  this.image,  this.type,  this.categories);
+  Card(this.cardId,  this.title,  this.image,  this.type,  this.categories);
 
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
   Map<String, dynamic> toJson() => _$CardToJson(this);
