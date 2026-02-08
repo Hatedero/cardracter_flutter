@@ -26,12 +26,15 @@ abstract class Api {
         responseBody: true));
     return _Api(dio);
   }
-  @GET("cards_with_all_attributes")
+  @GET("cards")
   Future<Cards> getCards();
+
+  @GET("card_heighest_id")
+  Future<int> getCardHeightsId();
 
   @GET("card_with_all_attributes")
   Future<Card> getCard(@Query("id") int cardId);
 
-  @POST("card_with_all_attributes?card=")
+  @POST("card_with_all_attributes")
   Future<int> saveCard(@Query("") Card card);
 }

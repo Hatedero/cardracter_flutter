@@ -32,7 +32,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'cards_with_all_attributes',
+              'cards',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -42,6 +42,32 @@ class _Api implements Api {
               baseUrl,
             ))));
     final value = Cards.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<int> getCardHeightsId() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'card_heighest_id',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
     return value;
   }
 
@@ -85,7 +111,7 @@ class _Api implements Api {
     )
         .compose(
           _dio.options,
-          'card_with_all_attributes?card=',
+          'card_with_all_attributes',
           queryParameters: queryParameters,
           data: _data,
         )

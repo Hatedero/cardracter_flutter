@@ -10,6 +10,10 @@ class _CardRepository {
     return apiCard.getCards();
   }
 
+  Future<int> getCardHeightsId() async{
+    return apiCard.getCardHeightsId();
+  }
+
   Future<Card> getCard(int cardId) async{
     print("called getCard !");
     return apiCard.getCard(cardId);
