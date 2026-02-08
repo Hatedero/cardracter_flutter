@@ -6,15 +6,17 @@ part 'card.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Card {
   final int cardId;
+  final int accountId;
   final String title;
   final String image;
   final String description;
   final CardType type;
   final List<Category> categories;
-  Card(this.cardId, this.title, this.image, this.description, this.type, this.categories);
+  Card(this.cardId, this.accountId, this.title, this.image, this.description, this.type, this.categories);
 
   Card copyWith({
     int? cardId,
+    int? accountId,
     String? title,
     String? image,
     String? description,
@@ -23,6 +25,7 @@ class Card {
   }) {
     return Card(
       cardId = cardId ?? this.cardId,
+      accountId = accountId ?? this.accountId,
       title = title ?? this.title,
       image = image ?? this.image,
       description = description ?? this.description,

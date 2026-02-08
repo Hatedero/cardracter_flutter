@@ -8,6 +8,7 @@ part of 'card.dart';
 
 Card _$CardFromJson(Map<String, dynamic> json) => Card(
       (json['cardId'] as num).toInt(),
+      (json['accountId'] as num).toInt(),
       json['title'] as String,
       json['image'] as String,
       json['description'] as String,
@@ -18,11 +19,12 @@ Card _$CardFromJson(Map<String, dynamic> json) => Card(
     );
 
 Map<String, dynamic> _$CardToJson(Card instance) => <String, dynamic>{
-      "cardId": instance.cardId.toString(),
-      'title': instance.title.toString(),
-      'image': instance.image.toString(),
-      'description': instance.description.toString(),
-      'type': _$CardTypeEnumMap[instance.type]!.toString(),
+      'cardId': instance.cardId,
+      'accountId': instance.accountId,
+      'title': instance.title,
+      'image': instance.image,
+      'description': instance.description,
+      'type': _$CardTypeEnumMap[instance.type]!,
       'categories': instance.categories.map((e) => e.toJson()).toList(),
     };
 

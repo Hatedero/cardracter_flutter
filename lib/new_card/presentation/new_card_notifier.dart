@@ -13,7 +13,7 @@ class NewCardNotifier extends ChangeNotifier {
 
   void createCard() {
     print("CREATE CARD");
-    card = Card(0, "New Card", Assets.imagesArtorias, "description",  CardType.Character,List.empty());
+    card = Card(0,1, "New Card", Assets.imagesArtorias, "description",  CardType.Character,List.empty());
 
     this.card = card;
 

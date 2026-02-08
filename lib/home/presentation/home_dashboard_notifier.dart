@@ -28,7 +28,7 @@ class HomeDashboardNotifier extends ChangeNotifier {
       this.cards = cardOneByOne;
     }
     else
-      this.cards = List.filled(10, Card(0, "Artorias", ""," The Abyss Walker", CardType.Character, List.empty()));
+      this.cards = List.filled(10, Card(0, 1,"Artorias", ""," The Abyss Walker", CardType.Character, List.empty()));
     notifyListeners();
   }
 }

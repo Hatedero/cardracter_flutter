@@ -12,7 +12,7 @@ class CardDetailsNotifier extends ChangeNotifier {
     if (card != null)
       this.card = card;
     else
-      this.card = Card(0, "Artorias", "", "The Abyss Walker", CardType.Character, List.empty());
+      this.card = Card(0, 1, "Artorias", "", "The Abyss Walker", CardType.Character, List.empty());
     notifyListeners();
   }
 }
