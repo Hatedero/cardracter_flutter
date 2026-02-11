@@ -10,10 +10,9 @@ class AccountView extends StatefulWidget {
 
   const AccountView({
     super.key,
-    required this.title,
   });
 
-  final String title;
+  final String title = "account";
 
 
   @override

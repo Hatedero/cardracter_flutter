@@ -31,7 +31,7 @@ class _NewCardViewState extends State<NewCardView> {
     if (card != null) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Edition"),
+          title: Text("Edit"),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         floatingActionButton: FloatingActionButton(
@@ -173,7 +173,7 @@ class _NewCardViewState extends State<NewCardView> {
             ),
           ),
           ElevatedButton(
-            child: Text('Nouvel Attribut'),
+            child: Text('New Attribute'),
             onPressed: addAttribute,
           ),
           const SizedBox(height: 16),

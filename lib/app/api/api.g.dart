@@ -32,7 +32,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'cards/',
+              'cards',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -46,19 +46,72 @@ class _Api implements Api {
   }
 
   @override
-  Future<bool> saveCard(Card card) async {
+  Future<int> getCardHeightsId() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<bool>(_setStreamType<bool>(Options(
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'card_heighest_id',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<Card> getCard(int cardId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': cardId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Card>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'card_with_all_attributes',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Card.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<int> saveCard(Card card) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'': card.toJson()};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'card/',
+          'card_with_all_attributes',
           queryParameters: queryParameters,
           data: _data,
         )

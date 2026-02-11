@@ -7,12 +7,31 @@ class HomeDashboardNotifier extends ChangeNotifier {
   List<Card>? cards;
 
   void getCards() async {
-    final cards = await cardRepository.getCards();
+    final heighestId = await cardRepository.getCardHeightsId();
 
-    if (cards.cards != null && cards.cards!.isNotEmpty)
-      this.cards = cards.cards;
-    else
-      this.cards = List.filled(10, Card(0, "Artorias The Abyss Walker", "", CardType.Character, List.empty()));
-    notifyListeners();
+    final List<Card> cardOneByOne = List.empty(growable: true);
+    for(int i=1; i<heighestId;i++){
+      try {
+        final card = await cardRepository.getCard(i);
+        if(card.type == CardType.Character) {
+          cardOneByOne.add(card);
+        }
+      } catch (e) {
+        print("Error fetching card ID $i: $e");
+      }
+    }
+    if(cardOneByOne.isNotEmpty){
+      this.cards = cardOneByOne;
+    } else {
+      this.cards = List.filled(10, Card(
+          0,
+          1,
+          "Artorias",
+          "",
+          " The Abyss Walker",
+          CardType.Character,
+          List.empty()));
+    }
+      notifyListeners();
   }
 }

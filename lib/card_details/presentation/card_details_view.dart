@@ -1,40 +1,73 @@
-import 'package:cardracter_flutter/app/widgets/card_preview.dart';
+import 'package:cardracter_flutter/card_details/presentation/card_details_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Card;
 import '../../app/widgets/app_bottom_bar.dart';
 import '../../app/model/card.dart';
+import 'package:provider/provider.dart';
+import '../../generated/assets.dart';
 
 class CardDetailsView extends StatefulWidget {
 
   const CardDetailsView({
     Key? key,
-    required this.card,
+    required this.cardId,
   }) : super(key: key);
 
-  final Card card;
+  final int cardId;
   final String title = "Card details";
-
 
   @override
   State<CardDetailsView> createState() => _CardDetailsViewState();
 }
 
 class _CardDetailsViewState extends State<CardDetailsView> {
+
   @override
-  Widget build(BuildContext context) {
-    final card = widget.card;
-
-    switch (card.type) {
-      case CardType.Character:
-        return _buildCharacterCard(context, card);
-
-      case CardType.Collection:
-        return _buildCollectionCard(context, card);
-    }
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      final notifier =  context.read<CardDetailsNotifier>();
+      //print(widget.cardId.toString());
+      notifier.getCard(widget.cardId);
+    });
+    //print("cardId in view "+widget.cardId.toString());
   }
 
-  /// === Character / Multi-category card ===
-  Widget _buildCharacterCard(BuildContext context, Card card) {
+  @override
+  Widget build(BuildContext context) {
+    final notifier =  context.watch<CardDetailsNotifier>();
+
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        bottomNavigationBar: const AppBottomBar(),
+        body: notifier.isLoading || notifier.card == null
+            ? const Center(child: CircularProgressIndicator())
+            : choseCardDetailBody(notifier.card)
+    );
+  }
+
+  Widget choseCardDetailBody(Card card) {
+    switch (card.type) {
+      case CardType.Character:
+        return _CharacterDetailsViewBody(card: card);
+      case CardType.Collection:
+        return _CollectionDetailsViewBody(card: card);
+      default:
+        return _CollectionDetailsViewBody(card: card);
+    }
+  }
+}
+
+class _CharacterDetailsViewBody extends StatelessWidget {
+
+  const _CharacterDetailsViewBody({required this.card});
+  final Card card;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         // Image section
@@ -43,7 +76,7 @@ class _CardDetailsViewState extends State<CardDetailsView> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              card.image,
+              Assets.imagesArtorias,
               fit: BoxFit.contain,
               height: MediaQuery
                   .of(context)
@@ -67,6 +100,15 @@ class _CardDetailsViewState extends State<CardDetailsView> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple,
+                      ),
+                    ),
+                    Text(
+                      card.description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.purple,
                       ),
@@ -97,9 +139,9 @@ class _CardDetailsViewState extends State<CardDetailsView> {
                                 color: Colors.purpleAccent,
                               ),
                             ),
-                           for (final attribute in category.attributes)
+                            for (final attribute in category.attributes)
                               Text(
-                                attribute.value ?? "no value",
+                                (attribute.title ?? "title")+" : "+(attribute.value ?? "no value"),
                                 style: const TextStyle(fontSize: 20),
                                 textAlign: TextAlign.left,
                               ),
@@ -118,9 +160,16 @@ class _CardDetailsViewState extends State<CardDetailsView> {
       ],
     );
   }
+}
 
+class _CollectionDetailsViewBody extends StatelessWidget {
   /// === Collection card (empty for now, same as Compose) ===
-  Widget _buildCollectionCard(BuildContext context, Card card) {
+
+  const _CollectionDetailsViewBody({required this.card});
+  final Card card;
+
+  @override
+  Widget build(BuildContext context) {
     return const SizedBox.shrink();
   }
 }
