@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => HomeDashboardNotifier()),
         ChangeNotifierProvider(create: (context) => CardDetailsNotifier()),
-
         ChangeNotifierProvider(create: (context) => NewCardNotifier())
       ],
       child: MaterialApp(
@@ -44,8 +43,11 @@ class MyApp extends StatelessWidget {
         routes: {
           "/home" : (context) => HomeDashboardView(),
           "/new_card" : (context) => NewCardView(),
-          "/card_details" : (context) => CardDetailsView(card:card),
-          "/account" : (context) => AccountView(title: "account"),
+          "/card_details" : (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as int;
+            return CardDetailsView(cardId: args);
+          },
+          "/account" : (context) => AccountView(),
           "/log_out" : (context) => HomeDashboardView(),
         },
         home: const HomeDashboardView(),

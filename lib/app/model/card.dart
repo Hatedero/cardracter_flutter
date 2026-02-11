@@ -21,7 +21,7 @@ class Card {
     String? image,
     String? description,
     CardType? type,
-    List<Category>? categories
+    List<Category>? categories,
   }) {
     return Card(
       cardId = cardId ?? this.cardId,

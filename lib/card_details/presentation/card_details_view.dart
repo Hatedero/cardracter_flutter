@@ -4,18 +4,16 @@ import 'package:flutter/material.dart' hide Card;
 import '../../app/widgets/app_bottom_bar.dart';
 import '../../app/model/card.dart';
 import 'package:provider/provider.dart';
-
 import '../../generated/assets.dart';
-
 
 class CardDetailsView extends StatefulWidget {
 
   const CardDetailsView({
     Key? key,
-    required this.card,
+    required this.cardId,
   }) : super(key: key);
 
-  final Card card;
+  final int cardId;
   final String title = "Card details";
 
   @override
@@ -28,22 +26,26 @@ class _CardDetailsViewState extends State<CardDetailsView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((callback) {
-      context.read<CardDetailsNotifier>().getCard();
+      final notifier =  context.read<CardDetailsNotifier>();
+      //print(widget.cardId.toString());
+      notifier.getCard(widget.cardId);
     });
+    //print("cardId in view "+widget.cardId.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    final card = context
-        .watch<CardDetailsNotifier>()
-        .card ?? widget.card;
+    final notifier =  context.watch<CardDetailsNotifier>();
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
         ),
         bottomNavigationBar: const AppBottomBar(),
-        body: choseCardDetailBody(card)
+        body: notifier.isLoading || notifier.card == null
+            ? const Center(child: CircularProgressIndicator())
+            : choseCardDetailBody(notifier.card)
     );
   }
 

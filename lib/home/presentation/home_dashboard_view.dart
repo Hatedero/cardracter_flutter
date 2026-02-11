@@ -67,15 +67,20 @@ class _HomeDashBoardBody extends StatelessWidget {
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
-      itemBuilder: (BuildContext context, int index) {
-        if (cards?[index] != null)
+      itemBuilder: (BuildContext context, int index){
+        if (cards?[index] != null) {
+          final Card card = cards![index];
+          //print("cardId set "+card.cardId.toString());
           return OutlinedButton(
-            style: outlineButtonStyle,
-            onPressed: (){
-              Navigator.of(context).pushNamed("/card_details", arguments : {cards![index]});
-              } ,
-            child : CardPreview(card: cards![index])
+              style: outlineButtonStyle,
+              onPressed: () {
+                //print("button pressed cardId "+card.cardId.toString());
+                Navigator.of(context).pushNamed(
+                    "/card_details", arguments: card.cardId.toInt());
+              },
+              child: CardPreview(card: card)
           );
+        }
       },
     );
   }
