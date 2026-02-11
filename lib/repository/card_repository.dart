@@ -6,7 +6,6 @@ final cardRepository = _CardRepository();
 class _CardRepository {
 
   Future<Cards> getCards() async{
-    print("called getCards  !");
     return apiCard.getCards();
   }
 
@@ -15,7 +14,6 @@ class _CardRepository {
   }
 
   Future<Card> getCard(int cardId) async{
-    print("called getCard !");
     return apiCard.getCard(cardId);
   }
 
