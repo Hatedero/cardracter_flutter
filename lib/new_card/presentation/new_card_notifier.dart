@@ -2,6 +2,8 @@ import 'package:cardracter_flutter/app/model/attribute_data.dart';
 import 'package:cardracter_flutter/app/model/card.dart';
 import 'package:cardracter_flutter/app/model/category.dart';
 import 'package:cardracter_flutter/repository/card_repository.dart';
+import 'package:cardracter_flutter/repository/category_repository.dart';
+import 'package:cardracter_flutter/repository/attribute_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../generated/assets.dart';
@@ -20,9 +22,15 @@ class NewCardNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveCard() {
+  Future<void> saveCard() async {
     print(card.toJson());
-    cardRepository.saveCard(card);
+    int cardId = await cardRepository.saveCard(card);
+    for(int i =0;i<card.categories.length;i++) {
+      int catId = await categoryRepository.saveCategory(card.categories[i].title.toString(),cardId);
+      for(int j =0;j<card.categories[i].attributes.length;j++) {
+        attributeRepository.saveAttribute("title",card.categories[i].attributes[j].value.toString(),catId);
+      }
+    }
   }
 
   void addNewCategory() {
