@@ -28,9 +28,6 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
 
   @override
   Widget build(BuildContext context) {
-
-    final cards = context.watch<HomeDashboardNotifier>().cards;
-
     //final cards = List.filled(10, Card(0, "title", "", CardType.Character, List.empty()));
 
     return Scaffold(
@@ -70,7 +67,6 @@ class _HomeDashBoardBody extends StatelessWidget {
       itemBuilder: (BuildContext context, int index){
         if (cards?[index] != null) {
           final Card card = cards![index];
-          //print("cardId set "+card.cardId.toString());
           return OutlinedButton(
               style: outlineButtonStyle,
               onPressed: () {

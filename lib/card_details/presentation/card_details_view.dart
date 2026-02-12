@@ -145,7 +145,6 @@ class _CharacterDetailsViewBody extends StatelessWidget {
                                 style: const TextStyle(fontSize: 20),
                                 textAlign: TextAlign.left,
                               ),
-
                           ],
                         ),
                       ),

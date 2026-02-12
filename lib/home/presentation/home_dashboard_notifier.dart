@@ -10,7 +10,7 @@ class HomeDashboardNotifier extends ChangeNotifier {
     final heighestId = await cardRepository.getCardHeightsId();
 
     final List<Card> cardOneByOne = List.empty(growable: true);
-    for(int i=1; i<heighestId;i++){
+    for(int i=1; i<=heighestId;i++){
       try {
         final card = await cardRepository.getCard(i);
         if(card.type == CardType.Character) {
